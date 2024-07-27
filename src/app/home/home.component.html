@@ -1,0 +1,116 @@
+<div class="container">
+    <div class="row pt-3">
+        <div class="col-6">
+            <h3 style="padding-bottom: 20px;">Student Portal</h3>
+        </div>
+        <div class="col-6 text-end">
+            <button class="btn btn-outline-success" (click)="openModel()" style="background-color: palevioletred;color: black;border-radius: 1px solid black;">Add New</button>
+        </div>
+    </div>
+    @if(StudentList.length !==0){
+        <div class="row">
+            @for (item of StudentList; track $index) 
+            {
+            <div class="col-4">
+                <div class="card" style="background-color:lightgoldenrodyellow; margin-bottom: 30px;" >
+                    <div class="card-header">
+                        <div class="row" style="background-color: aliceblue;">
+                            <div class="col-6">
+                            <b>Name: </b> <span style="color:palevioletred ;">{{item.name}}</span>
+                            </div>
+                            <div class="col-6 text-end">
+                             <b>MobileNo: </b>{{item.mobileNo}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <b>Address: </b> {{item.city}},    {{item.state}},  {{item.pincode}}
+                         {{item.address}}
+                    </div>
+                    <div class="card-footer text-center" style="background-color: aliceblue;">
+                        <div class="row">
+                            <div class="col-9">
+                                <b>Email: </b>{{item.email}}
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-sm btn-primary" (click)="onEdit(item)" style="background-color:palevioletred ;margin-bottom: 10px;">Edit</button>
+                                <button class="btn btn-sm btn-danger" (click)="onDelete(item)">Delete</button>
+                            </div>
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+    }
+    @else{
+        <div class="row">
+            <div class="col-8">
+                <p>No Response Found create new Record</p>
+            </div>
+        </div>
+    }
+    
+    </div>
+    
+    <div class="modal" id="myModal" #myModal>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title">Create New Student</h2>
+              <button type="button" class="btn-close" (click)="closeModel()"></button>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+                <div class="col-8">
+                    <label for="">Name</label>
+                    <input type="text" [(ngModel)]="studentobj.name" class="form-control" placeholder="Name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <label for="">Mobile No</label>
+                    <input type="text" [(ngModel)]="studentobj.mobileNo" class="form-control" placeholder="Mobile No">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <label for="">Email</label>
+                    <input type="text" [(ngModel)]="studentobj.email" class="form-control" placeholder="Email">
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-4">
+                    <label for="">City</label>
+                    <input type="text" [(ngModel)]="studentobj.city" class="form-control" placeholder="City">
+                </div>
+                <div class="col-4">
+                    <label for="">State</label>
+                    <input type="text" [(ngModel)]="studentobj.state" class="form-control" placeholder="State">
+                </div>
+                <div class="col-4">
+                    <label for="">Pincode</label>
+                    <input type="text" [(ngModel)]="studentobj.pincode" class="form-control" placeholder="Pincode">
+                </div>
+             </div>
+            <div class="row">
+                <div class="col-12">
+                    <label for="">Address</label>
+                    <textarea rows="3" [(ngModel)]="studentobj.address" class="form-control"></textarea>
+                </div>
+            </div>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="closeModel()" >Close</button>
+              @if(studentobj.id ==0){
+              <button type="button" class="btn btn-primary" (click)="saveStudent()">Save Student</button>
+              }
+              @else {
+                <button type="button" class="btn btn-success" (click)="updateStudent()">Update Student</button>
+              }
+            </div>
+        </div>
+        </div>
+        
+    

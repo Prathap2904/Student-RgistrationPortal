@@ -1,0 +1,9 @@
+input,textarea{
+    border-color: blueviolet;
+    border-radius: 2px solid;
+}
+.modal-title{
+    text-align: center;
+    color: palevioletred;
+
+}
